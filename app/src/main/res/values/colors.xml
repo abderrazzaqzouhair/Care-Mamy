@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base colors -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Gender-based primary -->
+    <color name="primary_boy">#007AFF</color>
+    <color name="primary_girl">#C678DD</color>
+
+    <color name="primary_transition">#6379EE</color>
+
+    <!-- Secondary and background -->
+    <color name="secondary">#FA7F61</color>
+    <color name="background_light">#FFF8F8F8</color>
+    <color name="card_bg">#E6FBD8E4</color>
+
+    <!-- Text colors -->
+    <color name="text_primary">#333333</color>
+    <color name="text_secondary">#777777</color>
+    <color name="text_secondary2">#999898</color>
+
+    <!-- Icon tint fallback -->
+    <color name="icon_tint_boy">#007AFF</color>
+    <color name="icon_tint_girl">#C678DD</color>
+</resources>

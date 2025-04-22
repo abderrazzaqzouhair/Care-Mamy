@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.chip.Chip
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/moodChip"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+    android:textColor="@android:color/black"
+    app:chipBackgroundColor="@android:color/transparent"
+    app:chipCornerRadius="8dp"
+    app:chipStrokeColor="@color/secondary"
+    app:chipStrokeWidth="1dp"/>

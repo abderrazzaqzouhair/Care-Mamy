@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "188238623461",
+    "project_id": "care-mamy",
+    "storage_bucket": "care-mamy.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:188238623461:android:420982836e09d82f95da0c",
+        "android_client_info": {
+          "package_name": "com.app.caremama"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "188238623461-egham19rk50v6mrdg0na37lolgqgmdp5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.caremama",
+            "certificate_hash": "fa0fe36316accbbe4e49ee4a3811280fe47130f3"
+          }
+        },
+        {
+          "client_id": "188238623461-989ddr4v9jfjicqujo40sqn22p0ulfl3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDT7s7GMC_4qPeZKFBE_1mlf5uMx5SRkhY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "188238623461-989ddr4v9jfjicqujo40sqn22p0ulfl3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

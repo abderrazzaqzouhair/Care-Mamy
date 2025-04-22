@@ -1,0 +1,97 @@
+<resources>
+    <string name="app_name">Care Mamy</string>
+    <string name="todo">todo</string>
+    <string name="get_started">Get started</string>
+    <string name="care">Care</string>
+    <string name="mamy">Mamy !</string>
+    <string name="navigate">Navigate</string>
+    <string name="pregnancy_together">Pregnancy Together</string>
+    <string name="welcome_to_care_mamy_app">Welcome to Care Mamy app</string>
+    <string name="invite_your_partner">Invite your partner and close ones. Super easy sync!</string>
+    <string name="tracking">Tracking</string>
+    <string name="tools">Tools</string>
+    <string name="monitor_your_progress_seamlessly_with_us">Monitor your progress seamlessly with us!</string>
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
+    <string name="create_an_account">Create An Account </string>
+    <string name="full_name">Full Name</string>
+    <string name="email_address">Email Address</string>
+    <string name="create_a_new_password">Create a new password</string>
+    <string name="create_account">Create Account</string>
+    <string name="i_already_have_an_account">I Already Have an Account</string>
+    <string name="log_in">Log In</string>
+    <string name="by_continuing_you_agree_to_our">By Continuing you agree to Our</string>
+    <string name="terms_of_service">Terms Of Service</string>
+    <string name="and">And</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="confirmer">Confirmer</string>
+    <string name="congratulations">Congratulations</string>
+    <string name="authontifiction_completed">Authontifiction Completed</string>
+    <string name="continuee">Continuee</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="or_continue_with">or Continue With</string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="login_to_your_account">Login to Your Account</string>
+    <string name="enter_you_email_address">Enter you email address</string>
+    <string name="send">Send</string>
+    <string name="did_not_receive_the_email">did not receive the email</string>
+    <string name="resend">Resend</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile">Profile</string>
+    <string name="change_password">Change Password</string>
+    <string name="language">Language</string>
+    <string name="en">En</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="about_us">About Us</string>
+    <string name="stop">Stop</string>
+    <string name="start">Start</string>
+    <string name="start_time">%s</string>
+    <string name="time_elapsed">%s</string>
+    <string name="log_out">Log Out</string>
+    <string name="select_language">Select Language</string>
+    <string name="arabic">Arabic</string>
+    <string name="french">French</string>
+    <string name="english">English</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="about_intro">
+        Following are the most common mistakes that you must avoid during your period:\n
+        Do not eat foods that contain a lot of salts: When you are having a period, excess intake of salts causes pain in your abdomen and a lack of water in your body. So if you want to avoid this issue, you should stop eating foods that contain a lot of salt just before one week your period starts.\n
+        Stop drinking too much coffee: Coffee contains too much caffeine that is very harmful during a period. You should take only one cup of coffee each day during the period. Taking in a lot of caffeine causes belly pain and other such discomforts.
+    </string>
+
+    <string name="about_question1">1. What should you not do in period?</string>
+    <string name="about_answer1">
+        Do not wear the same pad throughout the whole day. If you do not change your pad, it causes a lot of moisture. This moisture can further cause infection and rashes, and you may feel a lot of itching. That is why you should keep on changing it every 6–8 hours.\n
+        Avoid smoking:\n
+        Smoking can increase the supply of hormones that worsens the period. So it is very necessary to keep yourself away from smoking during a period.
+    </string>
+
+    <string name="about_question2">2. What should you not do in period?</string>
+    <string name="about_answer2">
+        Stop drinking too much coffee: Coffee contains too much caffeine that is very harmful during a period. You should take only one cup of coffee each day during the period. Taking in a lot of caffeine causes belly pain and other such discomforts.\n
+        Do not wear the same pad throughout the whole day. If you do not change your pad, it causes a lot of moisture. This moisture can further cause infection and rashes, and you may feel a lot of itching. That is why you should keep on changing it every 6–8 hours.\n
+        Smoking can increase the supply of hormones that worsens the period. So it is very necessary to keep yourself away from smoking during a period. Do not wax or shave your private part: During the period, your private part skin becomes more sensitive. In such a condition, if you do wax, it can cause allergic reactions on your private part. So avoid waxing it during your period.
+    </string>
+    <string name="about_question3">3. What foods are good to eat during your period?</string>
+    <string name="about_answer3">
+        Eating the right foods during your period can help ease pain and discomfort. Include iron-rich foods like spinach, lentils, and red meat to replace the iron you lose during bleeding. Bananas and dark chocolate can improve your mood. Drinking herbal teas like chamomile and ginger tea helps reduce cramps and bloating.
+    </string>
+
+    <string name="about_question4">4. How can you relieve period pain naturally?</string>
+    <string name="about_answer4">
+        You can relieve period pain naturally by applying a hot water bag to your lower abdomen. Regular light exercise like walking or stretching helps improve blood flow. Deep breathing, meditation, or yoga can reduce stress and muscle tension. Make sure to get enough sleep and stay hydrated.
+    </string>
+
+    <string name="care_mamy_app">Care Mamy app</string>
+    <string name="send_feedback">Send Feedback</string>
+    <string name="notification">Notification</string>
+    <string name="privacy_amp_policy"><![CDATA[Privacy & Policy]]></string>
+    <string name="home">Home</string>
+    <string name="advices">Advices</string>
+</resources>
