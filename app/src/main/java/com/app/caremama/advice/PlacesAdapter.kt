@@ -1,69 +1,115 @@
 package com.app.caremama.advice
 
 
-import android.content.Context
+import android.content.Intent
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
-import android.widget.RatingBar
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.app.caremama.R
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 
-data class SavedPlaces(
-    val title:String,
-    val description:String,
-    val city: String,
-    val image:String,
-    val saved:Boolean,
-    val rating: Int
+
+data class Tip(
+    val id: String,
+    val title: String,
+    val description: String,
+    val image: String,
+    val rating: Int,
+    val category: String,
+    val trimester: String,
+    val source: String,
+    val isEmergency: Boolean
 )
 
 
-class PlacesAdapter(private val cardList: List<SavedPlaces>,val  context: Context) : RecyclerView.Adapter<PlacesAdapter.ViewHolder>() {
+class TipAdapter(private val tips: List<Tip>) : RecyclerView.Adapter<TipAdapter.TipViewHolder>() {
 
-
-        class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val cardImage: ImageView = view.findViewById(R.id.imagePlace)
-        val favoriteIcon: ImageView = view.findViewById(R.id.favoriteIcon)
-        val cardTitle: TextView = view.findViewById(R.id.title)
-        val cardDescription: TextView = view.findViewById(R.id.reviewText)
-        val location: TextView = view.findViewById(R.id.location)
-        val ratingBar: RatingBar = view.findViewById(R.id.ratingBar)
+    class TipViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val imageTip: ImageView = itemView.findViewById(R.id.imageTip)
+        val imageProgress: ProgressBar = itemView.findViewById(R.id.imageProgress)
+        val titleTip: TextView = itemView.findViewById(R.id.titleTip)
+        val descTip: TextView = itemView.findViewById(R.id.descTip)
+        val btnReadMore: Button = itemView.findViewById(R.id.btnReadMore)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TipViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.places, parent, false)
-        return ViewHolder(view)
+        return TipViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val cardItem = cardList[position]
-        holder.cardTitle.text = cardItem.title
-        holder.cardDescription.text = cardItem.description
-        holder.ratingBar.rating = cardItem.rating.toFloat()
-        holder.location.text = "${cardItem.city}, Morroco"
-        holder.favoriteIcon.setOnClickListener {
-            holder.favoriteIcon.setImageResource(R.drawable.girl)
-            SavedPlacesPrefs(context).savePlace(cardItem.city)
-        }
-        val context = holder.itemView.context
-        val resId = context.resources.getIdentifier(cardItem.image, "drawable", context.packageName)
-        if (resId != 0) {
-            holder.cardImage.setImageResource(resId)
-        } else {
-            holder.cardImage.setImageResource(R.drawable.baseline_lock_24)
+    override fun onBindViewHolder(holder: TipViewHolder, position: Int) {
+        val tip = tips[position]
+        holder.titleTip.text = tip.title
+        holder.descTip.text = tip.description
+
+        holder.imageProgress.visibility = View.VISIBLE
+        holder.btnReadMore.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.whattoexpect.com/pregnancy/"))
+            it.context.startActivity(intent)
         }
 
+        Glide.with(holder.itemView.context)
+            .load(tip.image)
+            .listener(object : RequestListener<Drawable> {
+                override fun onLoadFailed(
+                    e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean
+                ): Boolean {
+                    holder.imageProgress.visibility = View.GONE
+                    return false
+                }
 
-
-
-//        holder.readMoreButton.setOnClickListener {
-//            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.mayoclinichealthsystem.org/hometown-health/speaking-of-health/tips-for-drinking-more-water"))
-//            it.context.startActivity(intent)
-//        }
+                override fun onResourceReady(
+                    resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean
+                ): Boolean {
+                    holder.imageProgress.visibility = View.GONE
+                    return false
+                }
+            })
+            .into(holder.imageTip)
     }
 
-    override fun getItemCount(): Int = cardList.size
+    override fun getItemCount(): Int = tips.size
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

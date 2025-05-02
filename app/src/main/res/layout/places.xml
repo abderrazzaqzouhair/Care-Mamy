@@ -1,83 +1,63 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cardView"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="4dp">
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    card_view:cardCornerRadius="12dp"
+    card_view:cardElevation="6dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="8dp">
+        android:padding="12dp">
 
         <!-- Image -->
         <ImageView
-            android:id="@+id/imagePlace"
+            android:id="@+id/imageTip"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="200dp"
             android:scaleType="centerCrop" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="8dp">
-
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="18sp"/>
-
-            <ImageView
-                android:id="@+id/favoriteIcon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_alignParentEnd="true"
-                android:src="@drawable/boy"
-                android:contentDescription="@string/todo" />
-        </RelativeLayout>
-
-        <!-- Location -->
-        <TextView
-            android:id="@+id/location"
+        <!-- ProgressBar for image loading -->
+        <ProgressBar
+            android:id="@+id/imageProgress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:drawablePadding="4dp"
-            android:paddingTop="4dp" />
+            android:layout_centerInParent="true"
+            android:visibility="visible" />
 
-        <!-- Rating and Review -->
+        <!-- Container for Text and Button -->
         <LinearLayout
+            android:id="@+id/ll"
+            android:orientation="vertical"
+            android:layout_below="@id/imageTip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="8dp"
-            android:gravity="center_vertical">
-
-            <RatingBar
-                android:id="@+id/ratingBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:numStars="5"
-                android:rating="4.5"
-                android:isIndicator="true"
-                android:stepSize="0.5"
-                style="?android:attr/ratingBarStyleSmall" />
+            android:layout_marginTop="8dp">
 
             <TextView
-                android:id="@+id/reviewText"
-                android:layout_width="0dp"
+                android:id="@+id/titleTip"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/descTip"
+                android:textSize="14sp"
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btnReadMore"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="8dp"
-                android:maxLines="2"
-                android:ellipsize="end"
-                android:textSize="14sp" />
+                android:layout_gravity="end"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/secondary"
+                android:text="Read More" />
         </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>

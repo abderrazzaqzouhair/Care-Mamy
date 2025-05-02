@@ -9,66 +9,64 @@ import android.annotation.SuppressLint
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.caremama.R
+import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
 class  AdviceFragment : Fragment() {
-    private lateinit var viewModel: PlacesViewModel
-    private lateinit var adapter: PlacesAdapter
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var savedProgressBar : ProgressBar
 
-    @SuppressLint("MissingInflatedId")
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view =  inflater.inflate(R.layout.fragment_places, container, false)
-        recyclerView = view.findViewById(R.id.recyclerView)
-        savedProgressBar = view.findViewById(R.id.savedProgressBar)
+        private lateinit var recyclerView: RecyclerView
+        private lateinit var adapter: TipAdapter
 
-        viewModel = ViewModelProvider(this).get(PlacesViewModel::class.java)
+        override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+        ): View? {
+            return inflater.inflate(R.layout.fragment_places, container, false)
+        }
 
-        setupObservers()
-        viewModel.getPlaces()
-        return view
-    }
-
-    private fun setupObservers() {
-        viewModel.placesList.observe(viewLifecycleOwner) { places ->
-            adapter = PlacesAdapter(places, requireContext())
+        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+            recyclerView = view.findViewById(R.id.recyclerView)
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
-            recyclerView.adapter = adapter
-        }
 
-        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-            savedProgressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-        }
-
-        viewModel.errorMessage.observe(viewLifecycleOwner) { error ->
-            Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
+            viewLifecycleOwner.lifecycleScope.launch {
+                try {
+                    val tips = RetrofitClient.api.getTips()
+                    adapter = TipAdapter(tips)
+                    view.findViewById<ProgressBar>(R.id.savedProgressBar).visibility = View.GONE
+                    recyclerView.adapter = adapter
+                } catch (e: Exception) {
+                    Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
 
+
+
+interface TipsApiService {
+    @GET("dev/pregnancy.php")
+    suspend fun getTips(): List<Tip>
 }
 
-interface ApiService {
 
-    @GET("dev/saved_places/savedPlaces.php")
-    suspend fun getPlaces(): List<SavedPlaces>
+
+object RetrofitClient {
+    private const val BASE_URL = "https://myonlinecertificate.com/"
+
+    val api: TipsApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(TipsApiService::class.java)
+    }
 }
 
-
-object ApiClient {
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("https://myonlinecertificate.com/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-
-    val apiService: ApiService = retrofit.create(ApiService::class.java)
-}

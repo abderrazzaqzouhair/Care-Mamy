@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.FrameLayout
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,10 +20,10 @@ import java.util.concurrent.TimeUnit
 
 class CounterFragment : Fragment(R.layout.fragment_counter) {
     private lateinit var circleButton: FrameLayout
-    private lateinit var timerArea: LinearLayout
     private lateinit var buttonStop: Button
     private lateinit var textStartTime: TextView
     private lateinit var textTimeRemaining: TextView
+    private lateinit var textKickCount: TextView
     private lateinit var recyclerViewJournal: RecyclerView
     private lateinit var lottie: LottieAnimationView
 
@@ -37,22 +36,28 @@ class CounterFragment : Fragment(R.layout.fragment_counter) {
     private var timer: CountDownTimer? = null
     private var kickCount: Int = 0
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initViews(view)
         setupRecyclerView()
         setupClickListeners()
+        updateCurrentTimeDisplay()
     }
 
     private fun initViews(view: View) {
         circleButton = view.findViewById(R.id.circleButton)
-        timerArea = view.findViewById(R.id.timerArea)
         buttonStop = view.findViewById(R.id.buttonStop)
         textStartTime = view.findViewById(R.id.textStartTime)
         textTimeRemaining = view.findViewById(R.id.textTimeRemaining)
+        textKickCount = view.findViewById(R.id.textKickCount)
         recyclerViewJournal = view.findViewById(R.id.recyclerViewJournal)
         lottie = view.findViewById(R.id.lottie)
+
+        // Initialize Lottie animation
+        lottie.setAnimation(R.raw.clicks)
+        lottie.speed = 2f
     }
 
     private fun setupRecyclerView() {
@@ -63,26 +68,36 @@ class CounterFragment : Fragment(R.layout.fragment_counter) {
 
     private fun setupClickListeners() {
         circleButton.setOnClickListener {
-            kickCount++
             if (!isCounting) {
                 startCounting()
             }
+            incrementKickCount()
         }
 
         buttonStop.setOnClickListener {
             if (isCounting) {
                 stopCounting()
+            } else {
+                startCounting()
             }
         }
+    }
+
+    private fun updateCurrentTimeDisplay() {
+        val currentTime = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
+        textStartTime.text = getString(R.string.time_elapsed, currentTime)
     }
 
     private fun startCounting() {
         isCounting = true
         startTime = System.currentTimeMillis()
         buttonStop.text = getString(R.string.stop)
-        lottie.playAnimation()
 
-        // Update start time display
+        // Reset kick count when starting new session
+        kickCount = 0
+        updateKickCountDisplay()
+
+        // Update start time display with current time
         val startTimeFormatted = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date(startTime))
         textStartTime.text = getString(R.string.start_time, startTimeFormatted)
 
@@ -99,17 +114,33 @@ class CounterFragment : Fragment(R.layout.fragment_counter) {
         }.start()
     }
 
+    private fun incrementKickCount() {
+        if (isCounting) {
+            kickCount++
+            updateKickCountDisplay()
+            playKickAnimation()
+        }
+    }
+
+    private fun updateKickCountDisplay() {
+        textKickCount.text = kickCount.toString()
+    }
+
+    private fun playKickAnimation() {
+        lottie.progress = 0f // Reset animation to start
+        lottie.playAnimation()
+    }
+
     private fun stopCounting() {
         isCounting = false
         timer?.cancel()
-        lottie.pauseAnimation()
         buttonStop.text = getString(R.string.start)
 
         val endTime = System.currentTimeMillis()
         val duration = endTime - startTime
 
         // Add session to journal
-        val dateFormat = SimpleDateFormat("MMM dd HH:mm", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("MMM dd, HH:mm", Locale.getDefault())
         val timeFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
 
         val newSession = KickSession(
@@ -122,10 +153,8 @@ class CounterFragment : Fragment(R.layout.fragment_counter) {
         journalAdapter.notifyItemInserted(0)
         recyclerViewJournal.scrollToPosition(0)
 
-        // Reset counters
-        kickCount = 0
+        // Reset counters but keep display
         elapsedTime = 0L
-        updateTimerDisplay(0)
     }
 
     private fun updateTimerDisplay(milliseconds: Long) {
